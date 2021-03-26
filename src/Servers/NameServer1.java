@@ -1,21 +1,21 @@
-package code;
+package Servers;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class NameServer2 {
+public class NameServer1 {
 
 
   private String address = "";
   private Integer number = 0;
   private final Map<String, Integer> domains = new HashMap<>();
 
-  private final NameServer3 nameServer3 = new NameServer3();
+  private final NameServer2 nameServer2 = new NameServer2();
 
-  public NameServer2() {
-    domains.put("cs", 100);
-    domains.put("extc", 102);
-    domains.put("it", 101);
+  public NameServer1() {
+    domains.put("nm", 111);
+    domains.put("dj", 112);
+    domains.put("sp", 113);
   }
 
   public void load(String url) {
@@ -25,12 +25,13 @@ public class NameServer2 {
 
     if (domains.containsKey(address)) {
       number = domains.get(address);
-      System.out.println("Department Address: " + number);
-      nameServer3.load(url);
+      System.out.println("Name Address: " + number);
+      nameServer2.load(url);
     }
   }
 
   public String getNumber() {
-    return nameServer3.getNumber() + "." + number;
+    return nameServer2.getNumber() + "." + number;
   }
+
 }
