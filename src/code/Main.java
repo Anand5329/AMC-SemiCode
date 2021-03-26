@@ -2,11 +2,17 @@ package code;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
 
   public static void main(String[] args) {
-    Servers.ClientNameResolver clientNameResolver = new Servers.ClientNameResolver(args[0]);
+    Scanner sc = new Scanner(System.in);
+    String input = sc.next();
+    //String input = args[0];
+    input = input.trim();
+    input = input.toLowerCase();
+    ClientNameResolver clientNameResolver = new ClientNameResolver(input);
     clientNameResolver.sendURL();
     System.out.println("Final Address: " + clientNameResolver.getNumber());
   }
@@ -15,7 +21,7 @@ public class Main {
 class ClientNameResolver {
 
   private final String url;
-  private Servers.RootNameResolver rootNameResolver = new Servers.RootNameResolver();
+  private RootNameResolver rootNameResolver = new RootNameResolver();
 
   public ClientNameResolver(String url) {
     this.url = url;
@@ -37,7 +43,7 @@ class RootNameResolver {
   private Integer number = 0;
   private final Map<String, Integer> domains = new HashMap<>();
 
-  private final Servers.NameServer1 nameServer1 = new Servers.NameServer1();
+  private final NameServer nameServer1 = new NameServer();
 
   public RootNameResolver() {
     domains.put("edu", 121);
@@ -70,7 +76,7 @@ class NameServer {
   private Integer number = 0;
   private final Map<String, Integer> domains = new HashMap<>();
 
-  private final Servers.NameServer2 nameServer2 = new Servers.NameServer2();
+  private final DepartmentServer nameServer2 = new DepartmentServer();
 
   public NameServer() {
     domains.put("nm", 111);
@@ -103,7 +109,7 @@ class DepartmentServer {
   private Integer number = 0;
   private final Map<String, Integer> domains = new HashMap<>();
 
-  private final Servers.NameServer3 nameServer3 = new Servers.NameServer3();
+  private final ProtocolServer nameServer3 = new ProtocolServer();
 
   public DepartmentServer() {
     domains.put("cs", 100);
